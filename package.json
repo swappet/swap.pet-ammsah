@@ -1,0 +1,37 @@
+{
+  "name": "ammsah",
+  "version": "1.0.0",
+  "description": "swap blockchain assets and farming with Automated Market Maker based on Split, Arbitrage and Hedging.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swappet/swap.pet-ammsah.git"
+  },
+  "keywords": [
+    "AMM",
+    "SWAP",
+    "UNI",
+    "UNISWAP",
+    "ETH",
+    "BTC",
+    "SPT",
+    "PETH",
+    "PUSD",
+    "PSTEEM"
+  ],
+  "author": "swap.pet",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/swappet/swap.pet-ammsah/issues"
+  },
+  "homepage": "https://github.com/swappet/swap.pet-ammsah#readme",
+  "devDependencies": {
+    "@openzeppelin/cli": "^2.8.2"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts-ethereum-package": "^3.0.0"
+  }
+}
