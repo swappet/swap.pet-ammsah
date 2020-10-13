@@ -1,4 +1,4 @@
-// contracts/test/SafeNamerTest.sol
+// test/SafeNamer.js
 // Copyright (C) 2020, 2021, 2022 Swap.Pet@pm.me
 // SPDX-License-Identifier: MIT
 const assert = require('assert');

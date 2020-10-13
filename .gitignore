@@ -110,4 +110,6 @@ dist
 build/
 
 # truffle 
-.secret
+.mnemonic
+.infuraKey
+.etherscan
