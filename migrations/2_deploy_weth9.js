@@ -2,9 +2,9 @@ const { scripts, ConfigManager } = require('@openzeppelin/cli');
 const { add, push, create } = scripts;
 
 async function deploy(options) {
-  add({ contractsData: [{ name: 'Counter', alias: 'Counter' }] });
+  add({ contractsData: [{ name: 'WETH9', alias: 'WETH9' }] });
   await push(options);
-  await create(Object.assign({ contractAlias: 'Counter' }, options));
+  await create(Object.assign({ contractAlias: 'WETH9' }, options));
 }
 
 module.exports = function(deployer, networkName, accounts) {
