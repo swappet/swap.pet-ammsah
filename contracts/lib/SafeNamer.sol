@@ -1,4 +1,4 @@
-// contracts/SafeNamer.sol
+// contracts/lib/SafeNamer.sol
 // Copyright (C) 2020, 2021, 2022 Swap.Pet@pm.me
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.6.0;
@@ -11,8 +11,8 @@ interface ITokenNamer {
 
     function symbol() external view returns (string memory);
 }
-// produces token descriptors from inconsistent or absent ERC20 symbol implementations that can return string or bytes32
-// this library will always produce a string symbol to represent the token
+
+// this library produce a string symbol to represent pair/mix token
 library SafeNamer {
     
     string private constant _PREFIX = '🐔';
