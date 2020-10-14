@@ -23,7 +23,7 @@ const {
     ether,          // ether('1')=>1e18=>1000000000000000000
     expectEvent,    // Assertions for emitted events
     expectRevert,   // Assertions for transactions that should fail
-    send,time } = require('@openzeppelin/test-helpers');//测试助手
+    send,time } = require('@openzeppelin/test-helpers'); 
 // time tool
 // await time.advanceBlock();
 // await time.advanceBlockTo(target)
