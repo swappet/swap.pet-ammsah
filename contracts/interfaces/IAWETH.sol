@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+// Copyright (C) 2020, 2021, 2022 Swap.Pet@pm.me
 pragma solidity >=0.4.0;
 
 /// @title Advanced WETH Interface

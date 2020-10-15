@@ -1,5 +1,7 @@
-// pragma solidity >=0.6.7;
-pragma solidity >=0.4.22 <0.8.0;
+// SPDX-License-Identifier: MIT
+// Copyright (C) 2020, 2021, 2022 Swap.Pet@pm.me
+// contracts/AWETH.sol
+pragma solidity ^0.6.0; 
 
 import "./interfaces/IWETH9.sol";
 import "./interfaces/IAWETH.sol";

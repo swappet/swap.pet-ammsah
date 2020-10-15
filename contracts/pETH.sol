@@ -1,5 +1,7 @@
-// // contracts/pETH.sol
-// pragma solidity ^0.6.2;
+// SPDX-License-Identifier: MIT
+// Copyright (C) 2020, 2021, 2022 Swap.Pet@pm.me
+// contracts/pETH.sol
+// pragma solidity ^0.6.0;
 
 // // Import base Initializable contract
 // // import "@openzeppelin/upgrades/contracts/Initializable.sol";

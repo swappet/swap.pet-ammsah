@@ -1,18 +1,16 @@
-// contracts/lib/SafeNamer.sol
-// Copyright (C) 2020, 2021, 2022 Swap.Pet@pm.me
 // SPDX-License-Identifier: MIT
+// Copyright (C) 2020, 2021, 2022 Swap.Pet@pm.me
+// contracts/lib/SafeNamer.sol
 pragma solidity ^0.6.0;
 
-/**
- * @dev Interface of the token with name()/symbol().
- */
+/// @dev Interface of the token with name()/symbol(). 
 interface ITokenNamer {
     function name() external view returns (string memory);
 
     function symbol() external view returns (string memory);
 }
 
-// this library produce a string symbol to represent pair/mix token
+/// @dev this library produce a string symbol to represent pair/mix token
 library SafeNamer {
     
     string private constant _PREFIX = '🐔';
@@ -20,61 +18,61 @@ library SafeNamer {
     string private constant _SEPARATOR = '-';
     string private constant _SUFFIX = '🥚';
 
-    // produces a pair name descriptor in the format of `${prefix}${name0}-${name1}${suffix}`
-    function pairName(string memory prefix,address token0, address token1,  string memory suffix) internal view returns (string memory) {
+    /// @notice produce pair name:`${prefix}${token0}-${token1}${suffix}`
+    function pairName(string memory prefix_,address token0_, address token1_,  string memory suffix_) internal view returns (string memory) {
         return string(
             abi.encodePacked(
-                bytes(prefix).length == 0?_PREFIX:prefix,
-                ITokenNamer(token0).name(),
+                bytes(prefix_).length == 0?_PREFIX:prefix_,
+                ITokenNamer(token0_).name(),
                 _SEPARATOR,
-                ITokenNamer(token1).name(),
-                bytes(suffix).length == 0 ?_SUFFIX:suffix
+                ITokenNamer(token1_).name(),
+                bytes(suffix_).length == 0 ?_SUFFIX:suffix_
             )
         );
     }
-    // produces a pair symbol in the format of `${prefix}${name0}-${name1}${suffix}`
-    function pairSymbol(string memory prefix,address token0, address token1, string memory suffix) internal view returns (string memory) {
+    /// @notice produce pair symbol:`${prefix}${token0}-${token1}${suffix}`
+    function pairSymbol(string memory prefix_,address token0_, address token1_, string memory suffix_) internal view returns (string memory) {
         return string(
             abi.encodePacked(
-                bytes(prefix).length == 0?_PREFIX:prefix,
-                ITokenNamer(token0).symbol(),
+                bytes(prefix_).length == 0?_PREFIX:prefix_,
+                ITokenNamer(token0_).symbol(),
                 _SEPARATOR,
-                ITokenNamer(token1).symbol(),
-                bytes(suffix).length == 0 ?_SUFFIX:suffix
+                ITokenNamer(token1_).symbol(),
+                bytes(suffix_).length == 0 ?_SUFFIX:suffix_
             )
         );
     }
-    // produces a mix name descriptor in the format of `${prefix}${name0:...:nameN}-${nameBase}${suffix}`
-    function mixName(string memory prefix,address[] memory tokens, address nameBase,  string memory suffix) internal view returns (string memory) {
-        require(tokens.length >= 2, 'SafeNamer: INVALID_TOKEN_NUM');
-        string memory symMix = ITokenNamer(tokens[0]).name();
-        for (uint i=1; i < tokens.length; i++) {
-            symMix = string(abi.encodePacked(symMix,_SPLITER,ITokenNamer(tokens[i]).name()));
+    /// @notice produce mix name:`${prefix}${token0:...:N}-${tokenBase}${suffix}`
+    function mixName(string memory prefix_,address[] memory tokens_, address tokenBase_,  string memory suffix_) internal view returns (string memory) {
+        require(tokens_.length > 1 && tokens_.length < 9, 'SafeNamer: token num err');
+        string memory symMix = ITokenNamer(tokens_[0]).name();
+        for (uint i=1; i < tokens_.length; i++) {
+            symMix = string(abi.encodePacked(symMix,_SPLITER,ITokenNamer(tokens_[i]).name()));
         }
         return string(
             abi.encodePacked(
-                bytes(prefix).length == 0?_PREFIX:prefix,
+                bytes(prefix_).length == 0?_PREFIX:prefix_,
                 symMix,
                 _SEPARATOR,
-                ITokenNamer(nameBase).name(),
-                bytes(suffix).length == 0 ?_SUFFIX:suffix
+                ITokenNamer(tokenBase_).name(),
+                bytes(suffix_).length == 0 ?_SUFFIX:suffix_
             )
         );
     }
-    // produces a mix symbol in the format of `${prefix}${name0:...:nameN}-${nameBase}${suffix}`
-    function mixSymbol(string memory prefix,address[] memory tokens, address nameBase, string memory suffix) internal view returns (string memory) {
-        require(tokens.length >= 2, 'SafeNamer: INVALID_TOKEN_NUM');
-        string memory symMix = ITokenNamer(tokens[0]).symbol();
-        for (uint i=1; i < tokens.length; i++) {
-            symMix = string(abi.encodePacked(symMix,_SPLITER,ITokenNamer(tokens[i]).symbol()));
+    /// @notice produce mix symbol:`${prefix}${token0:...:N}-${tokenBase}${suffix}`
+    function mixSymbol(string memory prefix_,address[] memory tokens_, address tokenBase_, string memory suffix_) internal view returns (string memory) {
+        require(tokens_.length > 1 && tokens_.length < 9, 'SafeNamer: token num err');
+        string memory symMix = ITokenNamer(tokens_[0]).symbol();
+        for (uint i=1; i < tokens_.length; i++) {
+            symMix = string(abi.encodePacked(symMix,_SPLITER,ITokenNamer(tokens_[i]).symbol()));
         }
         return string(
             abi.encodePacked(
-                bytes(prefix).length == 0?_PREFIX:prefix,
+                bytes(prefix_).length == 0?_PREFIX:prefix_,
                 symMix,
                 _SEPARATOR,
-                ITokenNamer(nameBase).symbol(),
-                bytes(suffix).length == 0 ?_SUFFIX:suffix
+                ITokenNamer(tokenBase_).symbol(),
+                bytes(suffix_).length == 0 ?_SUFFIX:suffix_
             )
         );
     }

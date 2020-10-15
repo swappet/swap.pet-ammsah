@@ -1,6 +1,6 @@
-// contracts/DaoFund.sol
-// Copyright (C) 2020, 2021, 2022 Swap.Pet@pm.me
 // SPDX-License-Identifier: MIT
+// Copyright (C) 2020, 2021, 2022 Swap.Pet@pm.me
+// contracts/DaoFund.sol
 pragma solidity ^0.6.0;  
 
 /// @title Fund of Swap.Pet DAO, include assets and settings

@@ -67,8 +67,12 @@ describe("SafeNamer test", function () {
         token1 = await FakeToken.new('tokenName1','TS1', { from: owner });
         token2 = await FakeToken.new('tokenName2','TS2', { from: owner });
         token3 = await FakeToken.new('tokenName3','TS3', { from: owner });
-        token4 = await FakeToken.new('tokenName4','TS4', { from: owner });
+        token4 = await FakeToken.new('tokenName4','TS4', { from: owner }); 
         token5 = await FakeToken.new('tokenName5','TS5', { from: owner });
+        token6 = await FakeToken.new('tokenName6','TS6', { from: owner });
+        token7 = await FakeToken.new('tokenName7','TS7', { from: owner });
+        token8 = await FakeToken.new('tokenName8','TS8', { from: owner });
+        token9 = await FakeToken.new('tokenName9','TS9', { from: owner }); 
     });
     it('name()', async function () {
         assert.equal(tBaseNamer[0], await tokenBase.name());
@@ -100,5 +104,27 @@ describe("SafeNamer test", function () {
     });
     it('mixSymbol for defualt pre and suf', async function () {
         expect(await mixNamer.mixSymbol("", [token1.address,token2.address,token3.address], tokenBase.address,"")).to.equal('🐔TS1:TS2:TS3-SPTB🥚');
+    });
+
+    it('mixName for 1 tokens', async function () { 
+        await expectRevert(mixNamer.mixName("", [token1.address], tokenBase.address,""),
+          'SafeNamer: token num err',
+        );
+    });
+    it('mixName for 9 tokens', async function () {
+        await expectRevert(mixNamer.mixName("", [token1.address,token2.address,token3.address,token4.address,token5.address,token6.address,token7.address,token8.address,token9.address], tokenBase.address,""),
+          'SafeNamer: token num err',
+        );
+    });
+
+    it('mixSymbol for 1 tokens', async function () { 
+        await expectRevert(mixNamer.mixSymbol("", [token1.address], tokenBase.address,""),
+          'SafeNamer: token num err',
+        );
+    });
+    it('mixSymbol for 9 tokens', async function () {
+        await expectRevert(mixNamer.mixSymbol("", [token1.address,token2.address,token3.address,token4.address,token5.address,token6.address,token7.address,token8.address,token9.address], tokenBase.address,""),
+          'SafeNamer: token num err',
+        );
     });
 });
