@@ -15,7 +15,8 @@ library SafeMath {
     function twins(uint a_, uint b_) internal pure returns (uint[2] memory) {
         return a_ < b_ ? [a_,b_] : [b_,a_];
     }
-    function average(uint a_, uint b_) internal pure returns (uint) {
+    // average
+    function avg(uint a_, uint b_) internal pure returns (uint) {
         return (a_ / 2) + (b_ / 2) + ((a_ % 2 + b_ % 2) / 2);
     }
     function add(uint a_, uint b_) internal pure returns (uint c_) {

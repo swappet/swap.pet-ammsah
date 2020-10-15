@@ -18,8 +18,8 @@ contract SafeMathTest {
     function twins(uint a_, uint b_) public pure returns (uint[2] memory) {
         return a_.twins(b_);
     }
-    function average(uint a_, uint b_) public pure returns (uint) {
-        return a_.average(b_);
+    function avg(uint a_, uint b_) public pure returns (uint) {
+        return a_.avg(b_);
     }
     function add(uint a_, uint b_) public pure returns (uint) { 
         return a_.add(b_);

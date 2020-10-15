@@ -42,8 +42,8 @@ describe("SafeMath test", function () {
         assert.equal(a.toString(),twins[0] );
         assert.equal(b.toString(),twins[1] );
     });
-    it('average(a,MaxUint256)', async function () {
-        assert.equal((MaxUint256.add(a).div(new BN(2))).toString(), await safeMathTest.average(a,MaxUint256));
+    it('avg(a,MaxUint256)', async function () {
+        assert.equal((MaxUint256.add(a).div(new BN(2))).toString(), await safeMathTest.avg(a,MaxUint256));
     });
     it('add(a,b)', async function () {
         assert.equal(a.add(b).toString(), await safeMathTest.add(a,b));
