@@ -2,46 +2,23 @@
 // Copyright (C) 2020, 2021, 2022 Swap.Pet@pm.me
 // SPDX-License-Identifier: MIT
 const assert = require('assert');
-const { contract, accounts,web3 } = require('@openzeppelin/test-environment');
+const { contract  } = require('@openzeppelin/test-environment');
 
 const { expect } = require('chai'); 
 
-const { 
-    BN,           // Big Number support
-    constants,    // Common constants, like the zero address and largest integers
-    ether,          // ether('1')=>1e18=>1000000000000000000
-    expectEvent,    // Assertions for emitted events
-    expectRevert,   // Assertions for transactions that should fail
-    send,time } = require('@openzeppelin/test-helpers'); 
-// time tool
-// await time.advanceBlock();
-// await time.advanceBlockTo(target)
-// await time.latest()
-// await time.latestBlock()
-// await time.increase(duration)
-// await time.increaseTo(target)
-// await time.increase(time.duration.years(2));
+const {  BN,  expectRevert } = require('@openzeppelin/test-helpers'); 
 
-// Loads the built artifact from build/contracts/SPTC.json
-// const ERC20 = artifacts.require('ERC20'); // truffle style
 const SafeMathTest = contract.fromArtifact("SafeMathTest"); 
-
-// get account from accounts array
-[owner, sender, receiver, purchaser, beneficiary] = accounts;
-
+ 
 const MaxUint256 = (new BN(2)).pow(new BN(256)).sub(new BN(1))
 const a = new BN('18');
-const b = new BN('58');
-const c = new BN('78');
-const d = new BN('98');
+const b = new BN('58'); 
 const a2 = new BN('324');   // a^2
 const a25 = new BN('329'); // a^2+5
  
-
-// contract('ERC20', function (accounts) { //  truffle style
 describe("SafeMath test", function () {     
     beforeEach(async function() {
-        safeMathTest = await SafeMathTest.new({ from: owner });
+        safeMathTest = await SafeMathTest.new();
     });
     it('max(a,b)', async function () {
         assert.equal(b.toString(), await safeMathTest.max(a,b));
@@ -65,8 +42,8 @@ describe("SafeMath test", function () {
         assert.equal(a.toString(),twins[0] );
         assert.equal(b.toString(),twins[1] );
     });
-    it('average(d,MaxUint256)', async function () {
-        assert.equal((MaxUint256.add(d).div(new BN(2))).toString(), await safeMathTest.average(d,MaxUint256));
+    it('average(a,MaxUint256)', async function () {
+        assert.equal((MaxUint256.add(a).div(new BN(2))).toString(), await safeMathTest.average(a,MaxUint256));
     });
     it('add(a,b)', async function () {
         assert.equal(a.add(b).toString(), await safeMathTest.add(a,b));
