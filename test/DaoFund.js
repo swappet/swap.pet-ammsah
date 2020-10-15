@@ -6,7 +6,7 @@ const { contract, accounts,web3 } = require('@openzeppelin/test-environment');
 
 const { expect } = require('chai');
 
-const {  constants,  expectRevert} = require('@openzeppelin/test-helpers');
+const {constants,expectRevert,expectEvent} = require('@openzeppelin/test-helpers');
 
 // Loads the built artifact from build/contracts/DaoFund.json
 // const DaoFund = artifacts.require('DaoFund'); // truffle style
@@ -21,14 +21,29 @@ describe("DaoFund test", function () {
     beforeEach(async function() {
         weth = await ERC20Test.new('WETH', 'WETH', '100000000', { from: founder });
         usdt = await ERC20Test.new('USDT', 'USDT', '100000000', { from: founder });
-        daoFund = await DaoFund.new(weth.address,usdt.address,{ from: founder }); 
+        daoFund = await DaoFund.new(owner,weth.address,usdt.address,{ from: founder }); 
+        assert.equal(await daoFund.emergency(), owner);
         assert.equal(await daoFund.weth(), weth.address);
         assert.equal(await daoFund.usdt(), usdt.address);
         assert.equal(await daoFund.founder(), founder);
         assert.equal(await daoFund.daoGov(), founder);
         assert.equal(await daoFund.daoOp(), founder);
-        await daoFund.setDaoGov(daoGov,{ from: founder});
-        await daoFund.setDaoOp(daoOp,{ from: daoGov});
+
+        let receipt = await daoFund.setEmergency(receiver, { from: founder });
+        expectEvent(receipt, 'SetEmergency', {
+            old_: owner,new_: receiver
+        });
+        receipt = await daoFund.setDaoGov(daoGov, { from: founder });
+        expectEvent(receipt, 'SetDaoGov', {
+            old_: founder,new_: daoGov
+        });
+        receipt = await daoFund.setDaoOp(daoOp,{ from: daoGov});
+        expectEvent(receipt, 'SetDaoOp', {
+            old_: founder,new_: daoOp
+        });
+    });
+    it('set new emergency', async function () { 
+        assert.equal(await daoFund.emergency(), receiver);
     });
     it('set new daoGov', async function () { 
         assert.equal(await daoFund.daoGov(), daoGov);
